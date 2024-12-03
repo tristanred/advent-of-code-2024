@@ -27,7 +27,7 @@ pub fn execute_p1() {
 
     let diff = sum_differences(sorted);
 
-    println!("Difference is {}", diff)
+    println!("Day 1, Part 1. Difference is {}", diff)
 }
 
 fn read_input(path: &str) -> Result<String, std::io::Error> {
@@ -78,8 +78,35 @@ fn sort_lists(lists: (Vec<N>, Vec<N>)) -> (Vec<N>, Vec<N>) {
     (a, b)
 }
 
-fn sum_differences((a, b): (Vec<N>, Vec<N>)) -> u64 {
+fn sum_differences((a, b): (Vec<N>, Vec<N>)) -> N {
     a.iter()
         .zip(b.iter())
         .fold(0, |_, (a, b)| a.abs_diff(*b))
+}
+
+/*
+    Title: Advent Of Code - Day 1, Part 2
+    Author: Tristan
+    Date: 03/12/2024
+    https://adventofcode.com/2024/day/1#part2
+*/
+pub fn execute_p2() {
+    let file_contents = read_input("src/d1/input.txt").expect("D1 input file not found.");
+    let lines = split_lines(&file_contents);
+    let (left, right) = parse_line_numbers(lines);
+
+    let score: usize = left
+        .iter()
+        .map(|f| calc_right_list_occurences(*f, &right))
+        .sum();
+
+    println!("Day 1, Part 2. Difference is {}", score)
+}
+
+/// Calculate the similarity score for an element
+fn calc_right_list_occurences(left: N, right_list: &Vec<N>) -> usize {
+    right_list
+        .iter()
+        .filter(|f| **f == left)
+        .count()
 }
