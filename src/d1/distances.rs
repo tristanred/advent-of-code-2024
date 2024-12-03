@@ -27,7 +27,7 @@ pub fn execute_p1() {
 
     let diff = sum_differences(sorted);
 
-    println!("Day 1, Part 1. Difference is {}", diff)
+    println!("Day 1, Part 1. Result is {}", diff)
 }
 
 fn read_input(path: &str) -> Result<String, std::io::Error> {
@@ -97,10 +97,10 @@ pub fn execute_p2() {
 
     let score: usize = left
         .iter()
-        .map(|f| calc_right_list_occurences(*f, &right))
+        .map(|f| (*f as usize) * calc_right_list_occurences(*f, &right))
         .sum();
 
-    println!("Day 1, Part 2. Difference is {}", score)
+    println!("Day 1, Part 2. Result is {}", score)
 }
 
 /// Calculate the similarity score for an element
