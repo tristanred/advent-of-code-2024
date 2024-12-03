@@ -81,7 +81,7 @@ fn sort_lists(lists: (Vec<N>, Vec<N>)) -> (Vec<N>, Vec<N>) {
 fn sum_differences((a, b): (Vec<N>, Vec<N>)) -> N {
     a.iter()
         .zip(b.iter())
-        .fold(0, |_, (a, b)| a.abs_diff(*b))
+        .fold(0, |acc, (a, b)| acc + a.abs_diff(*b))
 }
 
 /*
